@@ -42,6 +42,17 @@ class room():
 			return str('There is '+outString[:-2]+' here.\n')
 		return('')
 
+	def add_item(self,item):
+		self.inventory.append(item)
+
+	def remove_item(self,item):
+		if item in self.inventory:
+			del(self.inventory[item])
+			return True
+		else:
+			return False
+
+
 reception = room('Reception','You can see the whole office from here!',[pen])
 elevator_corridor = room('the elevators','The doors open and you walk on the dunder mifflen floor',[])
 main_office = room('the Bullpen','This is in the main office area',[computer])
