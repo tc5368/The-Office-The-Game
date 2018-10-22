@@ -37,29 +37,29 @@ class room():
 	def show_items(self):
 		if len(self.inventory) > 0:
 			outString = ''
-			for item in self.inventory:
-				outString += item.get_name( )+', '
+			for i in range(len(self.inventory)):
+				outString += self.inventory[i].get_name( )+', '
 			return str('There is '+outString[:-2]+' here.\n')
 		return('')
 
 	def add_item(self,item):
-		self.inventory.append(item)
+		self.inventory.append(items[item])
 
 	def remove_item(self,item):
-		if item in self.inventory:
-			del(self.inventory[item])
+		if items[item] in self.inventory:
+			del(self.inventory[self.inventory.index(items[item])])
 			return True
 		else:
 			return False
 
 
-reception = room('Reception','You can see the whole office from here!',[pen])
-elevator_corridor = room('the elevators','The doors open and you walk on the dunder mifflen floor',[])
+reception = room('Reception','You can see the whole office from here!',[])
+elevator_corridor = room('the elevators','The doors open and you walk on the dunder mifflen floor',[pen])
 main_office = room('the Bullpen','This is in the main office area',[computer])
 michaels_office = room('Michaels Office','Oh god your in the Bosses Office, good luck',[])
 conference_room = room('the Conference Room','You were supposed to be here 5 minutes ago',[])
 kitchen_area = room('the Kitchen','Make sure to label your food!, also you see Kevin is making Chilli',[])
-annex = room('the Annex','Escape as quickly as possible! This is where Toby is...',[otherExamples])
+annex = room('the Annex','Escape as quickly as possible! This is where Toby is...',[])
 break_room = room('the Breakroom','Realx and raid the vending machines',[])
 
 

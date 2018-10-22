@@ -18,4 +18,6 @@ class item():
 
 pen = item('a Pen','Black Pen, looks to be in good condition',0.2)
 computer = item('a computer','Very nice computer, but since its an old tv hsow probably running vista',10)
-otherExamples = item('name','description',0)
+
+
+items = {'pen':pen,'computer':computer}

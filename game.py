@@ -1,10 +1,11 @@
-
+global inventory
 from rooms import *
 from items import *
-current_room = elevator_corridor
-global inventory
+from game_parser import normalise_input as norm
 
-inventory = [pen,computer]
+current_room = elevator_corridor
+
+inventory = []
 
 def main():
 	global current_room
@@ -15,14 +16,33 @@ def main():
 		print('Your currently in '+current_room.get_name())
 		print(current_room.get_discription())
 		print(current_room.show_items())
-		movement = str(input('> '))
+		user_input = str(input('> '))
+		instruction = norm(user_input)
+		execute(instruction)
 
-		#This is where the Parser should go...
+def execute(instruction):
+	if instruction == []:
+		print('I don\'t understand')
 
-		if movement in [north,south,east,west]:
-			move(movement)
-		else:
-			print('I don\'t understand')
+	elif instruction[0] == 'go':
+		move(instruction[1])
+
+	elif instruction[0] == 'take':
+		take_item(instruction[1])
+
+	elif instruction[0] == 'drop':
+		drop_item(instruction[1])
+
+	elif instruction[0] in ['i','inventory']:
+		print(inventory)
+
+	elif instruction[0] == 'exit':
+		doubleCheck = input('Are you sure you want to quit (Y/N)')
+		if doubleCheck.upper() == 'Y':
+			exit()
+	else:
+		print('I don\'t understand')
+
 
 def move(direction):
 	global current_room
@@ -30,16 +50,18 @@ def move(direction):
 
 def take_item(item):
 	if current_room.remove_item(item):
-		print('You have succsessfully picked up,',item.get_name())
-		inventory.append(item)
+		print('You have succsessfully picked up,',items[item].get_name())
+		inventory.append(items[item])
 	else:
 		print('You can\'t take that')
 
 def drop_item(item):
-	if item in inventory:
-		print('You have dropped',item.get_name())
-		del(inventory[inventory.index(item)])
+	if items[item] in inventory:
+		print('You have dropped',items[item].get_name())
+		del(inventory[inventory.index(items[item])])
 		current_room.add_item(item)
+	else:
+		print(items[item].get_name(),'is not in your inventory')
 
 def is_game_still_going():
 	return True
