@@ -11,6 +11,8 @@ skip_words = ['a', 'about', 'all', 'an', 'another', 'any', 'around', 'at',
               'towards', 'until', 'us', 'want', 'we', 'what', 'when', 'why',
               'wish', 'with', 'would']
 
+keep_words = ['go','take','drop']
+
 
 def filter_words(words, skip_words):
     output = []
