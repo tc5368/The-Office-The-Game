@@ -59,11 +59,12 @@ main_office = room('the Bullpen','This is in the main office area',[computer])
 michaels_office = room('Michaels Office','Oh god your in the Bosses Office, good luck',[])
 conference_room = room('the Conference Room','You were supposed to be here 5 minutes ago',[])
 kitchen_area = room('the Kitchen','Make sure to label your food!, also you see Kevin is making Chilli',[])
-annex = room('the Annex','Escape as quickly as possible! This is where Toby is...',[])
+annex = room('the Annex','Escape as quickly as possible! This is where Toby is...',[ball])
 break_room = room('the Breakroom','Realx and raid the vending machines',[])
+accounting = room('Accounting Department','The accountants are here',[])
 
 
-reception.addExits({east:main_office,north:michaels_office,west:elevator_corridor})
+reception.addExits({east:main_office,south:accounting,north:michaels_office,west:elevator_corridor})
 elevator_corridor.addExits({east:reception})
 main_office.addExits({north:conference_room,east:kitchen_area,west:reception})
 michaels_office.addExits({south:reception})
@@ -71,6 +72,7 @@ conference_room.addExits({south:main_office})
 kitchen_area.addExits({east:annex,west:main_office})
 annex.addExits({north:break_room,west:kitchen_area})
 break_room.addExits({south:break_room})
+accounting.addExits({north:reception})
 
 rooms = {
 	'Elevators'        :elevator_corridor,

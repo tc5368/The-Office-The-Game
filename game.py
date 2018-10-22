@@ -1,6 +1,7 @@
 global inventory
 from rooms import *
 from items import *
+from npc import *
 from game_parser import normalise_input as norm
 
 current_room = elevator_corridor
@@ -16,6 +17,12 @@ def main():
 		print('Your currently in '+current_room.get_name())
 		print(current_room.get_discription())
 		print(current_room.show_items())
+		print()
+		print('DEBUGGINGMODE')
+		stanley.randomise_movement()
+		print(stanley.get_location())
+		print()
+
 		user_input = str(input('> '))
 		instruction = norm(user_input)
 		execute(instruction)
