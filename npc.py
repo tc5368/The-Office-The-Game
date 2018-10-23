@@ -6,9 +6,17 @@ class character():
 		self.name = name
 		self.current_location = starting_location
 		self.inventory = inventory
+		self.task = False
 
 	def interact(self):		#Will be used in the future for dialoge
 		return None
+
+	def isTaskDone(self):
+		if True:
+			return False
+
+	def recieve_item(self,item):
+		self.inventory.append(items[item])
 
 	def random_direction(self):
 		if r(0,10) > 7:
@@ -42,4 +50,6 @@ dwight = character('Dwight',kitchen,[])
 michael = character('Michael',michaels_office,[])
 
 #This dictionary is to allow for the string input to be evaluated to an NPC
+
 chars = {'stanley':stanley,'jim':jim,'pam':pam,'dwight':dwight,'michael':michael}
+

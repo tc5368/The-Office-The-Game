@@ -13,7 +13,6 @@ current_room = elevator_corridor
 inventory = []
 
 
-
 def main():
 	#This runs once at the beginning of the game and acts as an intro.
 	global current_room
@@ -22,6 +21,7 @@ def main():
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
+
 		print('-------------------------------------------------------------------------------------------------')
 		print('Your currently in '+current_room.get_name()) #This shows the room your currently in 
 		print(current_room.get_discription())               #along with its description, inventory and characters.
@@ -30,6 +30,13 @@ def main():
 		user_input = str(input('> '))    #This is where the player input is taken in
 		instruction = norm(user_input)	 #this runs the input through the parser
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
+
+
+def execute(instruction):
+	if len(instruction) == 0:
+		print('Idon\'t understand')
+
+	elif len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
 
 
 
@@ -80,7 +87,6 @@ def inspect_item(item):
 	else:
 		print('That item is not in your inventory')
 
-
 def move(direction):
 	global current_room
 	current_room, message = current_room.go(direction)		#This is the move function it runs the room class method that
@@ -106,6 +112,30 @@ def is_game_still_going():				#This is where the win condition will go, all the 
 	return True
 
 
+def idea():
+	stuff_to_save = [current_room,inventory,rooms,items,chars]
+
+
+if __name__ == '__main__':		#The auto run....
+	main()
+
+
+
+'''
+give NPCS TASK's
+THEY ALL WANT A CERTAIN ITEM
+THEY NEED DIALOUGE
+CHECK TASK COMPLETE
+IF 3 NPC Task Complete win game
+MAYBE CLS OS if TIME
+MAYBE SAVING IF TIME
+ADD in ANdon's Stuff
+Add in text stuff
+
+finsih game
+'''
+
+
 
 
 
@@ -119,3 +149,4 @@ def idea():
 
 if __name__ == '__main__':		#The auto run....
 	main()
+
