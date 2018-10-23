@@ -50,4 +50,6 @@ dwight = character('Dwight',kitchen,[])
 michael = character('Michael',michaels_office,[])
 
 #This dictionary is to allow for the string input to be evaluated to an NPC
+
 chars = {'stanley':stanley,'jim':jim,'pam':pam,'dwight':dwight,'michael':michael}
+

@@ -6,12 +6,12 @@ from rooms import *
 from items import *
 from npc import *
 from game_parser import normalise_input as norm
-import os
 
 
 #Assign the global variables for the game
 current_room = elevator_corridor
 inventory = []
+
 
 def main():
 	#This runs once at the beginning of the game and acts as an intro.
@@ -21,7 +21,7 @@ def main():
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
-		os.system('cls')
+
 		print('-------------------------------------------------------------------------------------------------')
 		print('Your currently in '+current_room.get_name()) #This shows the room your currently in 
 		print(current_room.get_discription())               #along with its description, inventory and characters.
@@ -31,11 +31,19 @@ def main():
 		instruction = norm(user_input)	 #this runs the input through the parser
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
 
+
 def execute(instruction):
 	if len(instruction) == 0:
 		print('Idon\'t understand')
 
 	elif len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
+
+
+
+
+def execute(instruction):
+
+	if len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
 		print('I don\'t understand')												#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
 
 	elif instruction[0] == 'go':
@@ -103,6 +111,7 @@ def drop_item(item):
 def is_game_still_going():				#This is where the win condition will go, all the time that it returns True the game continues.
 	return True
 
+
 def idea():
 	stuff_to_save = [current_room,inventory,rooms,items,chars]
 
@@ -125,3 +134,19 @@ Add in text stuff
 
 finsih game
 '''
+
+
+
+
+
+
+
+
+
+def idea():
+	stuff_to_save = [current_room,inventory,rooms,items,chars]
+
+
+if __name__ == '__main__':		#The auto run....
+	main()
+
