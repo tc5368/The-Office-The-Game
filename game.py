@@ -33,15 +33,6 @@ def main():
 
 
 def execute(instruction):
-	if len(instruction) == 0:
-		print('Idon\'t understand')
-
-	elif len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
-
-
-
-
-def execute(instruction):
 
 	if len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
 		print('I don\'t understand')												#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
