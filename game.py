@@ -22,7 +22,7 @@ def main():
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
-		print('---------------------------------------------------------------------------------------------------')
+		print('-------------------------------------------------------------------------------------------------')
 		print('Your currently in '+current_room.get_name()) #This shows the room your currently in 
 		print(current_room.get_discription())               #along with its description, inventory and characters.
 		print(current_room.show_items())
@@ -36,8 +36,8 @@ def main():
 
 def execute(instruction):
 
-	if len(instruction) <= 1 and instruction[0] != 'inventory':		#This tests to make sure the second words was spelled correctly 
-		print('I don\'t understand')								#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
+	if len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
+		print('I don\'t understand')												#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
 
 	elif instruction[0] == 'go':
 		move(instruction[1])							#If the first item in the instruction list is go then it runs
@@ -104,6 +104,17 @@ def drop_item(item):
 
 def is_game_still_going():				#This is where the win condition will go, all the time that it returns True the game continues.
 	return True
+
+
+
+
+
+
+
+
+
+def idea():
+	stuff_to_save = [current_room,inventory,rooms,items,chars]
 
 
 if __name__ == '__main__':		#The auto run....

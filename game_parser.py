@@ -2,7 +2,7 @@
 from items import items
 from npc import chars
 #Replace the filter words with this keep words
-keep_words = ['go','take','drop','north','south','west','east','inventory']
+keep_words = ['go','take','drop','north','south','west','east','inventory','exit','everyone','look','where']
 
 for names in items:
     keep_words.append(names)    #This just adds all the possible items and characters to the keep_words
