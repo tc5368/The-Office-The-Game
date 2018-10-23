@@ -35,9 +35,10 @@ def main():
 
 
 def execute(instruction):
-	if instruction == []:
-		print('I don\'t understand')     				#If the instruction is blank, someone just pressing enter
-														#then it just prints that it dosen't understand and passes
+
+	if len(instruction) <= 1 and instruction[0] != 'inventory':		#This tests to make sure the second words was spelled correctly 
+		print('I don\'t understand')								#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
+
 	elif instruction[0] == 'go':
 		move(instruction[1])							#If the first item in the instruction list is go then it runs
 														#the move function with the second item in the list eg a direction

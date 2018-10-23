@@ -1,25 +1,19 @@
 
-
-#This is words to remove from the input string
-skip_words = ['a', 'about', 'all', 'an', 'another', 'any', 'around', 'at',
-              'bad', 'beautiful', 'been', 'better', 'big', 'can', 'every', 'for',
-              'from', 'good', 'have', 'her', 'here', 'hers', 'his', 'how',
-              'i', 'if', 'in', 'into', 'is', 'it', 'its', 'large', 'later',
-              'like', 'little', 'main', 'me', 'mine', 'more', 'my', 'now',
-              'of', 'off', 'oh', 'on', 'please', 'small', 'some', 'soon',
-              'that', 'the', 'then', 'this', 'those', 'through', 'till', 'to',
-              'towards', 'until', 'us', 'want', 'we', 'what', 'when', 'why',
-              'wish', 'with', 'would']
-
+from items import items
+from npc import chars
 #Replace the filter words with this keep words
-keep_words = ['go','take','drop','north','south','west','east']
+keep_words = ['go','take','drop','north','south','west','east','inventory']
 
+for names in items:
+    keep_words.append(names)    #This just adds all the possible items and characters to the keep_words
+for names in chars:             #list to make sure they are recognised by the parser for where and look
+    keep_words.append(names)
 
 def filter_words(words):
     output = []
     for w in words:                         #This is the filter words should be changed to keep words
-        if w not in skip_words:             #instead of removing words not needed.
-            output.append(w)         #but at the moment works by looping through the words in the
+        if w in keep_words:                 #instead of removing words not needed.
+            output.append(w)                #but at the moment works by looping through the words in the
     return output                           #list and then only adding ones not in skip words to the output list
 
 def remove_punct(text):
