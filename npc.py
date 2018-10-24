@@ -2,21 +2,33 @@ from random import randint as r
 from rooms import *
 
 class character():
-	def __init__(self, name,starting_location,inventory):	
+	def __init__(self, name,starting_location,target,inventory):	
 		self.name = name
 		self.current_location = starting_location
+		self.target = target
 		self.inventory = inventory
 		self.task = False
 
 	def interact(self):		#Will be used in the future for dialoge
 		return None
 
-	def isTaskDone(self):
-		if True:
+	def is_task_done(self):
+		if self.target in self.inventory:
+			return True
+		else:
 			return False
 
-	def recieve_item(self,item):
+	def receive_item(self,item):
 		self.inventory.append(items[item])
+
+	def get_inventory(self):
+		print(self.name+' has ',end='')
+		for item in self.inventory:							#Prints the contents of your inventory
+			print(item.get_name(),end=' ')
+		print()	
+
+	def get_room(self):
+		return self.current_location
 
 	def random_direction(self):
 		if r(0,10) > 7:
@@ -31,7 +43,7 @@ class character():
 		return r 				#This function will simply return the name and the location of the given NPC
 
 	def get_name(self):		#This returns the NPC's name
-		return self.name 			
+		return str(self.name) 			
 
 	def randomise_movement(self):				#Uses the method to get a random direction to try and travel in 
 		direction = self.random_direction() 	#If given a direction the NPC uses the same move function as the player
@@ -43,13 +55,12 @@ class character():
 												#can't move we don't use the message variable here but need it there anyway.
 
 #This is where all the Chaarcters are defined, they have a name, starting location and their inventory
-stanley = character('Stanley',main_office,[])
-jim = character('Jim',reception,[])
-pam = character('Pam',reception,[])
-dwight = character('Dwight',kitchen,[])
-michael = character('Michael',michaels_office,[])
+stanley = character('Stanley',main_office,crossword_book,[])
+jim = character('Jim',reception,computer,[])
+pam = character('Pam',reception,teapot,[])
+dwight = character('Dwight',kitchen,beet,[])
+michael = character('Michael',michaels_office,dundie,[])
 
 #This dictionary is to allow for the string input to be evaluated to an NPC
 
 chars = {'stanley':stanley,'jim':jim,'pam':pam,'dwight':dwight,'michael':michael}
-

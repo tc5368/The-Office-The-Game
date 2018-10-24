@@ -21,6 +21,11 @@ class item():
 pen = item('a Pen','Black Pen, looks to be in good condition')
 computer = item('a computer','Very nice computer, but since its an old its probably running vista')
 ball = item('a ball','red ball')
+crossword_book = item('a Crossword Book','Half filled in book of crosswords')
+teapot = item('a Teapot', 'This teapot seems to be full of random items?')
+beet = item('a lone beet','Nothing but the best produce from Schrute Farms')
+dundie = item('a Dundie','This trophy is for excellence')
+
 
 #this is the dictionary for all the items
-items = {'pen':pen,'computer':computer,'ball':ball}
+items = {'pen':pen,'computer':computer,'ball':ball, 'book':crossword_book,'teapot':teapot,'dundie':dundie,'beet':beet}

@@ -60,11 +60,11 @@ reception           = room('Reception',           	'You can see the whole office
 elevator_corridor   = room('the elevators',      	'The doors open and you walk on the dunder mifflen floor',				[pen])
 main_office         = room('the Bullpen',         	'This is in the main office area',										[computer])
 michaels_office     = room('Michaels Office',     	'Oh god your in the Bosses Office, good luck',							[])
-conference_room     = room('the Conference Room', 	'You were supposed to be here 5 minutes ago',							[])
-kitchen             = room('the Kitchen',        	'Make sure to label your food!, also you see Kevin is making Chilli',	[])
+conference_room     = room('the Conference Room', 	'You were supposed to be here 5 minutes ago',							[crossword_book])
+kitchen             = room('the Kitchen',        	'Make sure to label your food!, also you see Kevin is making Chilli',	[teapot])
 annex               = room('the Annex',			  	'Escape as quickly as possible! This is where Toby is...',				[ball])
-break_room          = room('the Breakroom',		  	'Realx and raid the vending machines',									[])
-accounting          = room('Accounting Department',	'The accountants are here',												[])
+break_room          = room('the Breakroom',		  	'Realx and raid the vending machines',									[dundie])
+accounting          = room('Accounting Department',	'The accountants are here',												[beet])
 
 
 #because the links between the rooms require the rooms to be initalised before assigment here we have a bank of addExit methods to 

@@ -16,25 +16,31 @@ inventory = []
 def main():
 	#This runs once at the beginning of the game and acts as an intro.
 	global current_room
-	print('You area a new salesman at the Dunder Mifflen Paper company.')
+	print('You are a new salesman at the Dunder Mifflen Paper company.')
 	print('You well on your way to being the Assistant to the Regional Manager\n')
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
-
+		
 		print('-------------------------------------------------------------------------------------------------')
 		print('Your currently in '+current_room.get_name()) #This shows the room your currently in 
 		print(current_room.get_discription())               #along with its description, inventory and characters.
+
+		print(who_is_here())
+
 		print(current_room.show_items())
 
 		user_input = str(input('> '))    #This is where the player input is taken in
 		instruction = norm(user_input)	 #this runs the input through the parser
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
+	print('You Win !!')
 
 
 def execute(instruction):
+	if len(instruction) == 0:
+		print('I don\'t understand')
 
-	if len(instruction) <= 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
+	if len(instruction) == 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
 		print('I don\'t understand')												#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
 
 	elif instruction[0] == 'go':
@@ -48,6 +54,13 @@ def execute(instruction):
 
 	elif instruction[0] == 'look':
 		inspect_item(instruction[1])					#This is used to look at the description of an item in your inventory
+
+
+	elif instruction[0] == 'give':
+		if len(instruction) < 3:
+			print('I don\'t understand')
+		else:
+			give(instruction[1],instruction[2])
 
 	elif instruction[0] == 'inventory':
 		print('You have in your invenotry',end=' ')
@@ -78,6 +91,25 @@ def inspect_item(item):
 	else:
 		print('That item is not in your inventory')
 
+
+def give(character,item):
+	if character not in chars and item not in items and character in items and item in chars:
+		temp = character
+		character = item 									#One of the things with this command is that it is
+		item = temp 										#equally right to say give stanley the pan and
+															#give the pen to stanley so have to check which is which
+	if character not in chars or item not in items:
+		print('I don\'t understand')
+	elif items[item] not in inventory:
+		print('You don\'t have that item')
+
+	else:
+		del(inventory[inventory.index(items[item])])
+		chars[character].receive_item(item)
+		chars[character].get_inventory()
+
+
+
 def move(direction):
 	global current_room
 	current_room, message = current_room.go(direction)		#This is the move function it runs the room class method that
@@ -100,7 +132,22 @@ def drop_item(item):
 		print(items[item].get_name(),'is not in your inventory')
 
 def is_game_still_going():				#This is where the win condition will go, all the time that it returns True the game continues.
+	for c in chars:
+		done = chars[c].is_task_done()
+		if done:
+			print(chars[c].get_name()+'is happy with you')
+		if done == True:
+			return False
 	return True
+
+
+def who_is_here():
+	char_string = ''
+	for c in chars:
+		if chars[c].get_room() == current_room:
+			char_string += chars[c].get_name()+' and '
+	return char_string[:-4]+'are currently in this room'
+
 
 
 def idea():
@@ -120,24 +167,8 @@ CHECK TASK COMPLETE
 IF 3 NPC Task Complete win game
 MAYBE CLS OS if TIME
 MAYBE SAVING IF TIME
-ADD in ANdon's Stuff
 Add in text stuff
 
 finsih game
 '''
-
-
-
-
-
-
-
-
-
-def idea():
-	stuff_to_save = [current_room,inventory,rooms,items,chars]
-
-
-if __name__ == '__main__':		#The auto run....
-	main()
 
