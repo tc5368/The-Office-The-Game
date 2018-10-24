@@ -43,7 +43,7 @@ class room():
 		return('')
 
 	def add_item(self,item):
-		self.inventory.append(items[item])							#This adds an item into the rooms inventory
+		self.inventory.append(items[item])						#This adds an item into the rooms inventory
 
 	def remove_item(self,item):
 		if items[item] in self.inventory:							#This checks to see if a given item is in the room's inventory, if

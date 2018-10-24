@@ -10,15 +10,24 @@ from game_parser import normalise_input as norm
 #Assign the global variables for the game
 current_room = elevator_corridor
 inventory = []
-
+difficulty = 0
 
 def main():
 	#This runs once at the beginning of the game and acts as an intro.
-	global current_room
+	global current_room, difficulty
 	start_time = time.time()
 	print_word_art()
 	print('You are a new salesman at the Dunder Mifflen Paper company.')
 	print('You well on your way to being the Assistant to the Regional Manager\n')
+	print('Would you like to play on easy medium or hard difficulty')
+	print('It only affects how many tasks you need to complete')
+	dif = input('> ')[0].lower()
+	if dif == 'e':
+		difficulty = 1
+	if dif == 'm':
+		difficulty = 3
+	if dif == 'h':
+		difficulty = 5
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
@@ -36,7 +45,7 @@ def main():
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
 	end_time = time.time()
 	time_taken  = end_time - start_time
-	print('You Win !!')
+	print_word_art_win()
 	print('You have completed your first day in a record time of '+str(round(time_taken))+' seconds')
 	#take player name
 	#save name with the time take
@@ -120,9 +129,6 @@ def give(character,item):
 	else:
 		del(inventory[inventory.index(items[item])])
 		chars[character].receive_item(item)
-		chars[character].get_inventory()
-
-
 
 def move(direction):
 	global current_room
@@ -152,7 +158,7 @@ def is_game_still_going():				#This is where the win condition will go, all the 
 		if done:
 			happy_workers += 1
 	print('You have helped out %s people' %happy_workers)
-	if happy_workers == 1:
+	if happy_workers == difficulty:
 		return False
 	return True
 
@@ -181,6 +187,22 @@ def print_word_art():
 	print("          \__/ /_//_/\__/       \_, / \_,_/ /_/_/_/\__/           ")
 	print("                               /___/                              ")
 	print()
+
+def print_word_art_win():
+	print()
+	print("`8.`8888.      ,8'  ,o888888o.     8 8888      88           `8.`888b                 ,8'  8888   8888 b.             8 ")
+	print(" `8.`8888.    ,8'. 8888     `88.   8 8888      88            `8.`888b               ,8'   8888   8888 888o.          8 ")
+	print("  `8.`8888.  ,8',8 8888       `8b  8 8888      88             `8.`888b             ,8'    8888   8888 Y88888o.       8 ")
+	print("   `8.`8888.,8' 88 8888        `8b 8 8888      88              `8.`888b     .b    ,8'     8888   8888 .`Y888888o.    8 ")
+	print("    `8.`88888'  88 8888         88 8 8888      88               `8.`888b    88b  ,8'      8888   8888 8o. `Y888888o. 8 ")
+	print("     `8. 8888   88 8888         88 8 8888      88                `8.`888b .`888b,8'       8888   8888 8`Y8o. `Y88888o8 ")
+	print("      `8 8888   88 8888        ,8P 8 8888      88                 `8.`888b8.`8888'        8888   8888 8   `Y8o. `Y8888 ")
+	print("       8 8888   `8 8888       ,8P  ` 8888     ,8P                  `8.`888`8.`88'         8888   8888 8      `Y8o. `Y8 ")
+	print("       8 8888    ` 8888     ,88'     8888   ,d8P                    `8.`8' `8,`'          8888   8888 8         `Y8o.` ")
+	print("       8 8888       `8888888P'        `Y88888P'                      `8.`   `8'           8888   8888 8            `Yo ")
+	print()
+
+
 
 def idea():
 	stuff_to_save = [current_room,inventory,rooms,items,chars]

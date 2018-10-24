@@ -13,6 +13,7 @@ class character():
 		print(self.get_name()+':  '+first_line_of_dialog[self.get_name()])
 		useless_plese_ignore_this_usless_fucking_variable = input('Press any key to continue')
 		print(self.get_name()+':  '+second_line_of_dialog[self.get_name()])
+		useless_plese_ignore_this_usless_fucking_variable = input('Press any key to continue')
 
 
 
@@ -25,18 +26,21 @@ class character():
 	def receive_item(self,item):
 		self.inventory.append(items[item])
 		if items[item] != self.target:
-			print('This is the wrong item for this person')
+			print(self.get_name()+':  '+third_line_of_dialog[self.get_name()])
 			self.drop_item(item)
+		else:
+			print(self.get_name()+':  '+fourth_line_of_dialog[self.get_name()])
 
 	def drop_item(self,item):
 		del(self.inventory[self.inventory.index(items[item])])
 		self.current_location.add_item(item)
 
 	def get_inventory(self):
-		print(self.name+' has ',end='')
-		for item in self.inventory:							#Prints the contents of your inventory
-			print(item.get_name(),end=' ')
-		print()	
+		if self.inventory != []:
+			print(self.name+' has ',end='')
+			for item in self.inventory:							#Prints the contents of your inventory
+				print(item.get_name(),end=' ')
+			print()	
 
 	def get_room(self):
 		return self.current_location
@@ -90,21 +94,21 @@ second_line_of_dialog = {
 'Pam':'Also if you happen to see my teapot could you please let me know!',
 'Dwight':'Find the mythical beet and I shall reward you greatly, as the assitant region manager I can do this..',
 'Stanley':'Ignores you some more, maybe if you help him find his crossword book he will infally acknowleage you',
-'Michael':'Nah but we have fun here, this office is a family GET ME MY FUCKING DUNDIE'
+'Michael':'Nah but we have fun here, I left my Dundie in the breakroom but i don\'t want to see toby can you go get it for me or your fired',
 }
 
 third_line_of_dialog = {
-'Jim':'',	
-'Pam':'',
-'Dwight':'',
-'Stanley':'',
-'Michael':''
+'Jim':'Hi man, sorry that\'s not my computer',	
+'Pam':'Oh sorry that\'s not my teapot',
+'Dwight':'Why are you handing me this. Does this look like my Beet to you ? MICHAEL the Temp is giving me rubbish!',
+'Stanley':'Keeps ignoring you, his only goal is getting back to his crossword to kill time before he can leave',
+'Michael':'Urgh NO.'
 }
 
 fourth_line_of_dialog = {
-'Jim':'',	
-'Pam':'',
-'Dwight':'',
-'Stanley':'',
-'Michael':''
+'Jim':'Ah thanks man I really appriciate you grabbing my laptop for me!',	
+'Pam':'Oh my Teapot, thank you so much, I couldn\'t bear to lose this!',
+'Dwight':'You may have a future here after all temp. Now ready for my first elcture in a lond seris of lectures about bear attacks ?',
+'Stanley':'OH JOYUS DAY! Stanley Embraces you and thanks you profusley before starting a crosword and forgeting you exsist',
+'Michael':'Wow kiss ass much. but seriously thank you. Want to come have dinner with me and Jan ?'
 }
