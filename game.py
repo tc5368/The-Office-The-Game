@@ -5,12 +5,12 @@ from rooms import *
 from items import *
 from npc import *
 from game_parser import normalise_input as norm
-
+from scoring import * 
 
 #Assign the global variables for the game
 current_room = elevator_corridor
 inventory = []
-difficulty = 0
+difficulty = 3
 
 def main():
 	#This runs once at the beginning of the game and acts as an intro.
@@ -31,6 +31,8 @@ def main():
 		difficulty = 3
 	if dif == 'h':
 		difficulty = 5
+	if dif == 't':
+		difficulty = 0
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
@@ -46,13 +48,26 @@ def main():
 		instruction = norm(user_input)	 #this runs the input through the parser
 		move_NPC()
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
+
 	end_time = time.time()
-	time_taken  = end_time - start_time
+	time_taken  = str(round(end_time - start_time))
 	print_word_art_win()
-	print('You have completed your first day in a record time of '+str(round(time_taken))+' seconds')
-	#take player name
-	#save name with the time take
-	#show a leaderboard
+	print('You have completed your first day in a record time of '+time_taken+' seconds')
+
+	player_name = input('What is your name for the scoreboard: ')
+	score = str(time_taken+' '+player_name)
+	allScores = load_scores()
+	allScores.append(score)
+	in_order = bubble_sort_score_section(allScores)
+	
+	print('\nThe Best scores so far have been: ')
+	if len(in_order) > 6:
+		for i in range(5):
+			print(items[i])
+	else:
+		for i in in_order:
+			print(i)
+	save_scores(in_order)
 
 def move_NPC():
 	for char in chars:
@@ -217,9 +232,6 @@ def print_word_art_win():
 	print()
 
 
-
-def idea():
-	stuff_to_save = [current_room,inventory,rooms,items,chars]
 
 
 if __name__ == '__main__':		#The auto run....
