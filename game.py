@@ -19,6 +19,9 @@ def main():
 	print_word_art()
 	print('You are a new salesman at the Dunder Mifflen Paper company.')
 	print('You well on your way to being the Assistant to the Regional Manager\n')
+
+	print_help()
+
 	print('Would you like to play on easy medium or hard difficulty')
 	print('It only affects how many tasks you need to complete')
 	dif = input('> ')[0].lower()
@@ -59,7 +62,7 @@ def execute(instruction):
 	if len(instruction) == 0:
 		print('I don\'t understand')
 
-	elif len(instruction) == 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
+	elif len(instruction) == 1 and instruction[0] not in  ['inventory','exit','help']:		#This tests to make sure the second words was spelled correctly 
 		print('I don\'t understand')												#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
 
 	elif instruction[0] == 'go':
@@ -74,6 +77,8 @@ def execute(instruction):
 	elif instruction[0] == 'look':
 		inspect_item(instruction[1])					#This is used to look at the description of an item in your inventory
 
+	elif instruction[0] == 'help':
+		print_help()
 
 	elif instruction[0] == 'give':
 		if len(instruction) < 3:
@@ -172,6 +177,15 @@ def who_is_here():
 		return char_string[:-4]+'is currently in this room'
 	else:
 		return 'There is no one here'
+
+
+def print_help():
+	print('You can go north south east or west')
+	print('Blah')
+	print('Blah')
+	print('etc')
+	print()
+
 
 def print_word_art():
 	print("  _______   _                 ____     __    __   _               ")
