@@ -10,7 +10,11 @@ class character():
 		self.task = False
 
 	def interact(self):		#Will be used in the future for dialoge
-		return None
+		print(self.get_name()+':  '+first_line_of_dialog[self.get_name()])
+		useless_plese_ignore_this_usless_fucking_variable = input('Press any key to continue')
+		print(self.get_name()+':  '+second_line_of_dialog[self.get_name()])
+
+
 
 	def is_task_done(self):
 		if self.target in self.inventory:
@@ -71,3 +75,36 @@ michael = character('Michael',michaels_office,dundie,[])
 #This dictionary is to allow for the string input to be evaluated to an NPC
 
 chars = {'stanley':stanley,'jim':jim,'pam':pam,'dwight':dwight,'michael':michael}
+
+
+first_line_of_dialog = {
+'Jim':'Hi I am Jim, nice to meet you',
+'Pam':'Hi I am pam, nice to meet you',
+'Dwight':'Beets where is my lucky BEET, MICAHEL JIM TOOK MY BEET',
+'Stanley':'Ignores you and searches for his crossword book',
+'Michael':'I am Date Mike, Nice to meet me...',
+}
+
+second_line_of_dialog = {
+'Jim':'Hey can you please do me a favour and help me find my computer',	
+'Pam':'Also if you happen to see my teapot could you please let me know!',
+'Dwight':'Find the mythical beet and I shall reward you greatly, as the assitant region manager I can do this..',
+'Stanley':'Ignores you some more, maybe if you help him find his crossword book he will infally acknowleage you',
+'Michael':'Nah but we have fun here, this office is a family GET ME MY FUCKING DUNDIE'
+}
+
+third_line_of_dialog = {
+'Jim':'',	
+'Pam':'',
+'Dwight':'',
+'Stanley':'',
+'Michael':''
+}
+
+fourth_line_of_dialog = {
+'Jim':'',	
+'Pam':'',
+'Dwight':'',
+'Stanley':'',
+'Michael':''
+}

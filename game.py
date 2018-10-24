@@ -1,5 +1,4 @@
-
-
+import time
 #All the other code is being imported here:
 global inventory
 from rooms import *
@@ -16,12 +15,13 @@ inventory = []
 def main():
 	#This runs once at the beginning of the game and acts as an intro.
 	global current_room
+	start_time = time.time()
+	print_word_art()
 	print('You are a new salesman at the Dunder Mifflen Paper company.')
 	print('You well on your way to being the Assistant to the Regional Manager\n')
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
-
 		print('-------------------------------------------------------------------------------------------------')
 		print('Your currently in '+current_room.get_name()) #This shows the room your currently in 
 		print(current_room.get_discription())               #along with its description, inventory and characters.
@@ -34,7 +34,13 @@ def main():
 		instruction = norm(user_input)	 #this runs the input through the parser
 		move_NPC()
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
+	end_time = time.time()
+	time_taken  = end_time - start_time
 	print('You Win !!')
+	print('You have completed your first day in a record time of '+str(round(time_taken))+' seconds')
+	#take player name
+	#save name with the time take
+	#show a leaderboard
 
 def move_NPC():
 	for char in chars:
@@ -70,7 +76,11 @@ def execute(instruction):
 		print('You have in your invenotry',end=' ')
 		for item in inventory:							#Prints the contents of your inventory
 			print(item.get_name(),end=' ')
-		print()								
+		print()
+
+	elif instruction[0] == 'talk':
+		chars[instruction[1]].interact()
+
 
 	elif instruction[0] == 'where':
 		if instruction[1].lower() == 'everyone':		#This is the fun one you can say where in 2 ways, either
@@ -141,8 +151,8 @@ def is_game_still_going():				#This is where the win condition will go, all the 
 		done = chars[c].is_task_done()
 		if done:
 			happy_workers += 1
-	print(happy_workers)
-	if happy_workers == 3:
+	print('You have helped out %s people' %happy_workers)
+	if happy_workers == 1:
 		return False
 	return True
 
@@ -157,7 +167,20 @@ def who_is_here():
 	else:
 		return 'There is no one here'
 
-
+def print_word_art():
+	print("  _______   _                 ____     __    __   _               ")
+	print(" |__   __| | |               / __ \   / _|  / _| (_)              ")
+	print("    | |    | |__     ___    | |  | | | |_  | |_   _    ___    ___ ")
+	print("    | |    |  _ \   / _ \   | |  | | |  _| |  _| | |  / __|  / _  ")
+	print("    | |    | | | | |  __/   | |__| | | |   | |   | | | (__  |  __/")
+	print("    |_|    |_| |_|  \___|    \____/  |_|   |_|   |_|  \___|  \___|")
+	print("                                                                  ")
+	print("            __    __                                              ")
+	print("           / /_  / /  ___        ___ _ ___ _  __ _  ___           ")
+	print("          / __/ / _ \/ -_)      / _ `// _ `/ /  ' \/ -_)          ")
+	print("          \__/ /_//_/\__/       \_, / \_,_/ /_/_/_/\__/           ")
+	print("                               /___/                              ")
+	print()
 
 def idea():
 	stuff_to_save = [current_room,inventory,rooms,items,chars]
@@ -165,19 +188,4 @@ def idea():
 
 if __name__ == '__main__':		#The auto run....
 	main()
-
-
-
-'''
-give NPCS TASK's
-THEY ALL WANT A CERTAIN ITEM
-THEY NEED DIALOUGE
-CHECK TASK COMPLETE
-IF 3 NPC Task Complete win game
-MAYBE CLS OS if TIME
-MAYBE SAVING IF TIME
-Add in text stuff
-
-finsih game
-'''
 
