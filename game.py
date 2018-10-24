@@ -195,11 +195,14 @@ def who_is_here():
 
 
 def print_help():
-	print('You can go north south east or west')
-	print('Blah')
-	print('Blah')
-	print('etc')
-	print()
+        print('You can go north south east or west')
+        print('you can pick, drop, look and give items')
+        print('you can talk to any of the Characters')
+        print('you can find out a characters location with where person')
+        print('or simply find out where everyone is with where is everyone')
+        print('you can type "inventory" to keep track of collected items')
+        print('you can type "exit" to leave the game')
+        print()
 
 
 def print_word_art():
