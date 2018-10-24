@@ -77,7 +77,7 @@ michaels_office.addExits(  	{south:reception})
 conference_room.addExits(  	{south:main_office})
 kitchen.addExits(          	{east:annex,west:main_office})
 annex.addExits(            	{north:break_room,west:kitchen})
-break_room.addExits(       	{south:break_room})
+break_room.addExits(       	{south:annex})
 accounting.addExits(       	{north:reception})
 
 #Here is a dictionary for the rooms to allows for the string to be linked to the room object.

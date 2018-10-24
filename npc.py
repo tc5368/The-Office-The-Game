@@ -20,6 +20,13 @@ class character():
 
 	def receive_item(self,item):
 		self.inventory.append(items[item])
+		if items[item] != self.target:
+			print('This is the wrong item for this person')
+			self.drop_item(item)
+
+	def drop_item(self,item):
+		del(self.inventory[self.inventory.index(items[item])])
+		self.current_location.add_item(item)
 
 	def get_inventory(self):
 		print(self.name+' has ',end='')

@@ -21,7 +21,7 @@ def main():
 
 	#This is the main loop that runs every turn.
 	while is_game_still_going():
-		
+
 		print('-------------------------------------------------------------------------------------------------')
 		print('Your currently in '+current_room.get_name()) #This shows the room your currently in 
 		print(current_room.get_discription())               #along with its description, inventory and characters.
@@ -32,15 +32,19 @@ def main():
 
 		user_input = str(input('> '))    #This is where the player input is taken in
 		instruction = norm(user_input)	 #this runs the input through the parser
+		move_NPC()
 		execute(instruction)			 #this then goes to the execute function which is lots of if statments.
 	print('You Win !!')
 
+def move_NPC():
+	for char in chars:
+		chars[char].randomise_movement()
 
 def execute(instruction):
 	if len(instruction) == 0:
 		print('I don\'t understand')
 
-	if len(instruction) == 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
+	elif len(instruction) == 1 and instruction[0] not in  ['inventory','exit']:		#This tests to make sure the second words was spelled correctly 
 		print('I don\'t understand')												#this stops the code from failing if it tries instructinon[1] on a list with 1 element.
 
 	elif instruction[0] == 'go':
@@ -132,12 +136,14 @@ def drop_item(item):
 		print(items[item].get_name(),'is not in your inventory')
 
 def is_game_still_going():				#This is where the win condition will go, all the time that it returns True the game continues.
+	happy_workers = 0
 	for c in chars:
 		done = chars[c].is_task_done()
 		if done:
-			print(chars[c].get_name()+'is happy with you')
-		if done == True:
-			return False
+			happy_workers += 1
+	print(happy_workers)
+	if happy_workers == 3:
+		return False
 	return True
 
 
@@ -146,7 +152,10 @@ def who_is_here():
 	for c in chars:
 		if chars[c].get_room() == current_room:
 			char_string += chars[c].get_name()+' and '
-	return char_string[:-4]+'are currently in this room'
+	if char_string != '':
+		return char_string[:-4]+'is currently in this room'
+	else:
+		return 'There is no one here'
 
 
 
